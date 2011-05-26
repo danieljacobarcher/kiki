@@ -1,8 +1,11 @@
+                            
+                            
                               /~\
                              C oo
                              _( ^)  kiki
                             /   ~\
-
+                            
+                            
 
 
 A lightweight, flexible key generator for NoSQL / Key-Value stores, such as Redis, Memcached, Riak, Tokyo Cabinet, etc.
