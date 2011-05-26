@@ -12,7 +12,7 @@ module Kiki
 
   module ClassMethods
     def cache_key(namespace, options = {})
-      class_eval %{
+      class_eval(<<-EVAL, __FILE__, __LINE__)
         class << self
           @@#{namespace}_key = Key.new "#{namespace}",
                                        "#{options[:delimiter] || ":"}",
@@ -27,7 +27,7 @@ module Kiki
         def #{namespace}_key(*args)
           return self.class.#{namespace}_key(*[self, *args])
         end
-      }
+      EVAL
 
       return self.send("#{namespace}_key")
     end
