@@ -1,6 +1,11 @@
-= kiki
+                              /~\
+                             C oo
+                             _( ^)  kiki
+                            /   ~\
 
-Generate unique keys for NoSQL data stores
+
+
+A lightweight, flexible key generator for NoSQL / Key-Value stores, such as Redis, Memcached, Riak, Tokyo Cabinet, etc.
 
 == Examples
 
@@ -9,28 +14,36 @@ Generate unique keys for NoSQL data stores
   
     cache_key :redis
   
-    cache_key :cassandra,
-              :delimiter => '/',
-              :identifier => :login
-  
-    [:mongo, :couch].each do |namespace|
-      cache_key namespace,
-                :delimiter => '::',
-                :domain => "admins"
-    end
+    cache_key :memcached,
+              :domain     => 'people',
+              :delimiter  => '/',
+              :identifier => :username
   end
-
 
   User.redis_key                  # => #<Keytar::Key:0x000001008ea9a8 @namespace="redis", @delimitter=":", @domain="users", @identifier=:id>
   User.redis_key("count")         # => redis:users:count
   User.find(1).redis_key          # => redis:users:1
   User.find(1).redis_key("items") # => redis:users:1:items
 
-  User.find(1).cassandra_key      # => cassandra/users/schneems
+  User.find(1).memcached_key      # => memcached/people/schneems
 
   # Configuration can be done on the key object
-  User.cassandra_key.identifier = :id
-  User.find(1).cassandra_key      # => cassandra/users/1
+  User.memcached_key.identifier = :email
+  User.find(1).memcached_key      # => memcached/people/mistersnowman@example.com
+
+== Configuration
+
+[namespace]   the first argument for +cache_key+, the instance and class method +[namespace]_key+ will be added, which generate keys prefixed by the namespace (eg. "redis" would add the method "redis_key", generating a key like "redis:users:1")
+
+[domain]      optional, defaults to the downcase, pluralized name of your class (eg. "class User" would have the domain "users")
+
+[delimiter]   optional, defaults to ":"
+
+[identifier]  this is the method that is sent when calling "*_key" on an instance, or passing non-string / non-numeric arguments into a "*_key" method. optional, defaults to ":id"
+
+== Credit
+
+This project was inspired by [Richard Schneeman](https://github.com/schneems/)'s awesome library [Keytar](https://github.com/schneems/keytar/). Essentially, this my alternative take on the problem, focusing on simplicity of API and implementation.
 
 == License
 

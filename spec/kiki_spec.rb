@@ -10,16 +10,12 @@ describe "Kiki" do
   
   it "should add *_key class methods" do
     User.should respond_to(:redis_key)
-    User.should respond_to(:cassandra_key)
-    User.should respond_to(:mongo_key)
-    User.should respond_to(:couch_key)
+    User.should respond_to(:memcached_key)
   end
   
   it "should add *_key instance methods" do
     @user.should respond_to(:redis_key)
-    @user.should respond_to(:cassandra_key)
-    @user.should respond_to(:mongo_key)
-    @user.should respond_to(:couch_key)
+    @user.should respond_to(:memcached_key)
   end
   
   it "should respond to configuration" do
@@ -42,27 +38,15 @@ describe "Kiki" do
     end
   end
   
-  describe "Cassandra key" do
+  describe "Memcached key" do
     it "should be correct for instance" do
-      @user.cassandra_key.should eql("cassandra/users/ramona")
+      @user.memcached_key.should eql("memcached/people/ramona")
     end
     
     it "should be correct with arguments" do
-      User.cassandra_key("comments").should eql("cassandra/users/comments")
-      @user.cassandra_key("comments").should eql("cassandra/users/ramona/comments")
-      @user.cassandra_key("comments", 42).should eql("cassandra/users/ramona/comments/42")
-    end
-  end
-  
-  describe "MongoDB key" do
-    it "should be correct for instance" do
-      @user.mongo_key.should eql("mongo::admins::3")
-    end
-    
-    it "should be correct with arguments" do
-      User.mongo_key("nodes").should eql("mongo::admins::nodes")
-      @user.mongo_key("nodes").should eql("mongo::admins::3::nodes")
-      @user.mongo_key("nodes", "xyz", 567).should eql("mongo::admins::3::nodes::xyz::567")
+      User.memcached_key("comments").should eql("memcached/people/comments")
+      @user.memcached_key("comments").should eql("memcached/people/ramona/comments")
+      @user.memcached_key("comments", 42).should eql("memcached/people/ramona/comments/42")
     end
   end
 end

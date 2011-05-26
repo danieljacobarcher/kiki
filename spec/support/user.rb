@@ -5,13 +5,8 @@ class User < Struct.new(:id, :username)
 
   cache_key :redis
 
-  cache_key :cassandra,
-            :delimiter => '/',
+  cache_key :memcached,
+            :delimiter  => '/',
+            :domain     => 'people',
             :identifier => :username
-
-  [:mongo, :couch].each do |namespace|
-    cache_key namespace,
-              :delimiter => '::',
-              :domain => "admins"
-  end
 end
