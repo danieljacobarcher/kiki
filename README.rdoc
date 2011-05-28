@@ -10,6 +10,10 @@
 
 A lightweight, flexible key generator for NoSQL / Key-Value stores, such as Redis, Memcached, Riak, Tokyo Cabinet, etc.
 
+== Installation
+
+  $ gem install kiki
+
 == Examples
 
   class User
@@ -46,13 +50,13 @@ A lightweight, flexible key generator for NoSQL / Key-Value stores, such as Redi
 
 == Credit
 
-This project was inspired by [Richard Schneeman](https://github.com/schneems/)'s awesome library [Keytar](https://github.com/schneems/keytar/). Essentially, this my alternative take on the problem, focusing on simplicity of API and implementation.
+This project was inspired by Richard Schneeman's awesome library Keytar (https://github.com/schneems/keytar). Essentially, this my alternative take on the problem, focusing on simplicity of API and implementation.
 
 == License
 
 kiki is licensed under the MIT License:
 
-Copyright (c) 2011 Mattt Thompson (http://mattt.me/)
+Copyright (c) 2011 Mattt Thompson (http://mattt.me)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
