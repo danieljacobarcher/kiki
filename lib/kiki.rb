@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require 'kiki/extensions'
-
 module Kiki
   autoload :Key,        'kiki/key'
   autoload :Version,    'kiki/version'
